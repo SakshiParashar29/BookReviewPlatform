@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://bookreviewplatform-3-msm9.onrender.com";
 
 class BookService {
   async getAll() {
