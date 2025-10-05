@@ -11,7 +11,8 @@ import { BookProvider } from "./Context/BookContext.jsx";
 import Footer from "./Components/Footer.jsx";
 
 const PrivateRoute = ({ children }) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  if (loading) return null;
   return user ? children : <Navigate to="/login" />;
 };
 
@@ -24,8 +25,8 @@ const App = () => {
 
             <main className="flex-grow">
               <Routes>
-                <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
 
                 <Route
                   path="/home"
@@ -63,7 +64,7 @@ const App = () => {
                   }
                 />
 
-                <Route path="/" element={<Navigate to="/home" />} />
+                <Route path="*" element={<Navigate to="/login" />} />
               </Routes>
             </main>
 
