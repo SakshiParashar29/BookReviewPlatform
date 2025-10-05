@@ -8,6 +8,7 @@ import BookDetails from "./Pages/BookDetailsPage.jsx";
 import BookFormPage from "./Pages/BookFormPage.jsx";
 import { AuthProvider, useAuth } from "./Context/AuthContext.jsx";
 import { BookProvider } from "./Context/BookContext.jsx";
+import Footer from "./Components/Footer.jsx";
 
 const PrivateRoute = ({ children }) => {
   const { user } = useAuth();
@@ -18,49 +19,56 @@ const App = () => {
   return (
     <AuthProvider>
       <BookProvider>
-          <Navbar />
-          <Routes>
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
-            
-            <Route
-              path="/home"
-              element={
-                <PrivateRoute>
-                  <Home />
-                </PrivateRoute>
-              }
-            />
+          <div className="flex flex-col min-h-screen">
+            <Navbar />
 
-            <Route
-              path="/books/:id"
-              element={
-                <PrivateRoute>
-                  <BookDetails />
-                </PrivateRoute>
-              }
-            />
+            <main className="flex-grow">
+              <Routes>
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login />} />
 
-            <Route
-              path="/add-book"
-              element={
-                <PrivateRoute>
-                  <BookFormPage />
-                </PrivateRoute>
-              }
-            />
+                <Route
+                  path="/home"
+                  element={
+                    <PrivateRoute>
+                      <Home />
+                    </PrivateRoute>
+                  }
+                />
 
-            <Route
-              path="/edit-book/:id"
-              element={
-                <PrivateRoute>
-                  <BookFormPage />
-                </PrivateRoute>
-              }
-            />
+                <Route
+                  path="/books/:id"
+                  element={
+                    <PrivateRoute>
+                      <BookDetails />
+                    </PrivateRoute>
+                  }
+                />
 
-            <Route path="/" element={<Navigate to="/home" />} />
-          </Routes>
+                <Route
+                  path="/add-book"
+                  element={
+                    <PrivateRoute>
+                      <BookFormPage />
+                    </PrivateRoute>
+                  }
+                />
+
+                <Route
+                  path="/edit-book/:id"
+                  element={
+                    <PrivateRoute>
+                      <BookFormPage />
+                    </PrivateRoute>
+                  }
+                />
+
+                <Route path="/" element={<Navigate to="/home" />} />
+              </Routes>
+            </main>
+
+            <Footer />
+          </div>
       </BookProvider>
     </AuthProvider>
   );
